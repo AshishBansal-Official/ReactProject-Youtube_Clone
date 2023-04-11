@@ -1,26 +1,22 @@
 import React from "react";
-import { MdMic, MdMoreVert } from "react-icons/md";
-import logo_icon from "../images/icons/logo_icon.svg";
-import menu_icon from "../images/icons/menu_icon.svg";
-import search_icon from "../images/icons/search_icon.svg";
-import userAuth_icon from "../images/icons/user_auth_icon.svg";
+import menu_icon from "../images/header/icons/menu_icon.svg";
+import logo_icon from "../images/header/icons/logo_icon.svg";
+import search_icon from "../images/header/icons/search_icon.svg";
+import mic_icon from "../images/header/icons/mic_icon.svg";
+import more_vert_icon from "../images/header/icons/more_vert_icon.svg";
+import userAuth_icon from "../images/header/icons/user_auth_icon.svg";
+
+import { SVGRenderer } from "../components/SVGRenderer";
 
 const Header = () => {
     return (
-        <div className="fixed top-0 w-full z-50">
+        <div className="fixed top-0 w-full z-50 fill-current">
             <div className="h-[var(--header-height)] w-full px-4 flex items-center justify-between">
                 {/* // start */}
-                <div className="flex items-center justify-center">
-                    <div className="h-10 w-10 p-2">
-                        <img
-                            src={menu_icon}
-                            alt="logo"
-                            className="w-full h-full"
-                        />
-                        {/* <MdMenu className="w-full h-full"></MdMenu> */}
-                    </div>
+                <div className="flex items-center justify-center shrink-0">
+                    <SVGRenderer src={menu_icon} />
                     <div className="flex p-4">
-                        <div className="h-5 aspect-auto">
+                        <div className="min-h-5 h-5 aspect-auto">
                             <img
                                 src={logo_icon}
                                 alt="logo"
@@ -47,31 +43,23 @@ const Header = () => {
                             />
                         </form>
                         <div className="bg-overlay-0 h-10 w-16 rounded-r-full flex items-center justify-center border border-dark-4">
-                            <div className="h-6 w-6">
-                                <img src={search_icon} alt="" />
-                            </div>
+                            <SVGRenderer small src={search_icon} />
                         </div>
                     </div>
-                    <div className="h-10 w-10 p-2 bg-dark-1 rounded-full ml-1">
-                        <MdMic className="w-full h-full"></MdMic>
-                    </div>
+                    <SVGRenderer
+                        src={mic_icon}
+                        className="bg-dark-1 rounded-full ml-1"
+                    />
                 </div>
                 {/* // end */}
                 <div className="flex items-center justify-end min-w-[225px]">
-                    <div className="h-10 w-10 p-2 mr-2">
-                        <MdMoreVert className="w-full h-full"></MdMoreVert>
-                    </div>
-                    <div className="border border-dark-4 fill-white rounded-full px-4 py-1.5 flex items-center justify-center">
-                        <div className="w-6 h-6 mr-1.5 -ml-1.5 text-red-300">
-                            <img
-                                src={userAuth_icon}
-                                alt=""
-                                className="text-blue-300 fill-slate-500"
-                                style={{
-                                    fill: "white",
-                                }}
-                            />
-                        </div>
+                    <SVGRenderer src={more_vert_icon} className="mr-2" />
+                    <div className="border border-dark-4 rounded-full px-4 py-1.5 flex items-center justify-center">
+                        <SVGRenderer
+                            src={userAuth_icon}
+                            className="mr-1.5 -ml-1.5"
+                            small
+                        />
                         <span className="font-medium tracking-wider text-[#3EA6FF]">
                             Sign in
                         </span>

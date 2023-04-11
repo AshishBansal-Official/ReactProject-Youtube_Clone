@@ -7,10 +7,11 @@
     :root {
         @apply font-roboto;
         @apply bg-[#0f0f0f];
-        @apply text-[#f1f1f1];
+        @apply text-text-primary;
 
         /* Variables */
         --header-height: 3.5rem;
         --min-sidebar-width: 4.5rem;
+        --sidebar-width: 15rem;
     }
 }
