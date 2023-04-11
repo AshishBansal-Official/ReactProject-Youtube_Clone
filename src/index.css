@@ -8,5 +8,9 @@
         @apply font-roboto;
         @apply bg-[#0f0f0f];
         @apply text-[#f1f1f1];
+
+        /* Variables */
+        --header-height: 3.5rem;
+        --min-sidebar-width: 4.5rem;
     }
 }

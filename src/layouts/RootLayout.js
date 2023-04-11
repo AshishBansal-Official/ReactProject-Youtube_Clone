@@ -8,9 +8,9 @@ const RootLayout = () => {
     return (
         <div className="text-sm">
             <Header></Header>
-            <SideBar></SideBar>
+            {/* <SideBar></SideBar> */}
             <MinSideBar></MinSideBar>
-            <Outlet></Outlet>
+            {/* <Outlet></Outlet> */}
         </div>
     );
 };

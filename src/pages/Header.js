@@ -8,7 +8,7 @@ import userAuth_icon from "../images/icons/user_auth_icon.svg";
 const Header = () => {
     return (
         <div className="fixed top-0 w-full z-50">
-            <div className="h-14 w-full px-4 flex items-center justify-between">
+            <div className="h-[var(--header-height)] w-full px-4 flex items-center justify-between">
                 {/* // start */}
                 <div className="flex items-center justify-center">
                     <div className="h-10 w-10 p-2">
