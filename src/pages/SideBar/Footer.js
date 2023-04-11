@@ -18,18 +18,24 @@ const Footer = () => {
     return (
         <div className="text-text-secondary leading-[1.125rem]">
             <div className="pt-4 px-6 flex flex-wrap">
-                {contentPrimary.map((content) => {
+                {contentPrimary.map((content, index) => {
                     return (
-                        <span className="mr-2 text-[0.8rem] font-medium">
+                        <span
+                            key={index}
+                            className="mr-2 text-[0.8125rem] font-medium"
+                        >
                             {content}
                         </span>
                     );
                 })}
             </div>
             <div className="pt-3 px-6 flex flex-wrap">
-                {contentSecondary.map((content) => {
+                {contentSecondary.map((content, index) => {
                     return (
-                        <span className="mr-2 text-[0.8rem] font-medium">
+                        <span
+                            key={index}
+                            className="mr-2 text-[0.8rem] font-medium"
+                        >
                             {content}
                         </span>
                     );

@@ -4,9 +4,9 @@ import logo_icon from "../images/header/icons/logo_icon.svg";
 import search_icon from "../images/header/icons/search_icon.svg";
 import mic_icon from "../images/header/icons/mic_icon.svg";
 import more_vert_icon from "../images/header/icons/more_vert_icon.svg";
-import userAuth_icon from "../images/header/icons/user_auth_icon.svg";
 
 import { SVGRenderer } from "../components/SVGRenderer";
+import SignInButton from "../components/SignInButton";
 
 const Header = () => {
     return (
@@ -14,7 +14,7 @@ const Header = () => {
             <div className="h-[var(--header-height)] w-full px-4 flex items-center justify-between">
                 {/* // start */}
                 <div className="flex items-center justify-center shrink-0">
-                    <SVGRenderer src={menu_icon} />
+                    <SVGRenderer small src={menu_icon} className="m-2" />
                     <div className="flex p-4">
                         <div className="min-h-5 h-5 aspect-auto">
                             <img
@@ -23,7 +23,7 @@ const Header = () => {
                                 className="w-full h-full"
                             />
                         </div>
-                        <span className="-mt-2 mx-1 text-[10px] font-thin">
+                        <span className="-mt-2.5 mx-1 text-[10px] font-thin">
                             IN
                         </span>
                     </div>
@@ -38,7 +38,7 @@ const Header = () => {
                         >
                             <input
                                 type="text"
-                                className="text-base h-10 w-[calc(100%-2.5rem)] rounded-l-full ml-10  pl-4 pr-1 outline-none border border-dark-4 border-r-0 bg-dark-0"
+                                className="text-base placeholder-text-secondary font-normal h-10 w-[calc(100%-2.5rem)] rounded-l-full ml-10  pl-4 pr-1 outline-none border border-dark-4 border-r-0 bg-dark-0"
                                 placeholder="Search"
                             />
                         </form>
@@ -46,24 +46,14 @@ const Header = () => {
                             <SVGRenderer small src={search_icon} />
                         </div>
                     </div>
-                    <SVGRenderer
-                        src={mic_icon}
-                        className="bg-dark-1 rounded-full ml-1"
-                    />
+                    <div className="bg-dark-1 rounded-full ml-1 p-2">
+                        <SVGRenderer small src={mic_icon} />
+                    </div>
                 </div>
                 {/* // end */}
                 <div className="flex items-center justify-end min-w-[225px]">
                     <SVGRenderer src={more_vert_icon} className="mr-2" />
-                    <div className="border border-dark-4 rounded-full px-4 py-1.5 flex items-center justify-center">
-                        <SVGRenderer
-                            src={userAuth_icon}
-                            className="mr-1.5 -ml-1.5"
-                            small
-                        />
-                        <span className="font-medium tracking-wider text-[#3EA6FF]">
-                            Sign in
-                        </span>
-                    </div>
+                    <SignInButton />
                 </div>
             </div>
         </div>
