@@ -6,11 +6,13 @@ import MiniSideBar from "../pages/MiniSideBar";
 
 const RootLayout = () => {
     return (
-        <div className="text-sm">
+        <div className="text-sm scrollbar">
             <Header></Header>
             <SideBar></SideBar>
             <MiniSideBar></MiniSideBar>
-            {/* <Outlet></Outlet> */}
+            <div className="mt-[var(--header-height)] ml-[var(--sidebar-width)] w-[calc(100%-var(--sidebar-width))] overflow-x-hidden">
+                <Outlet></Outlet>
+            </div>
         </div>
     );
 };

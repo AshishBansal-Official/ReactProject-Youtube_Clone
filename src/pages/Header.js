@@ -10,7 +10,7 @@ import SignInButton from "../components/SignInButton";
 
 const Header = () => {
     return (
-        <div className="fixed top-0 w-full z-50 fill-current">
+        <div className="fixed top-0 w-full z-50 bg-app-bg">
             <div className="h-[var(--header-height)] w-full px-4 flex items-center justify-between">
                 {/* // start */}
                 <div className="flex items-center justify-center shrink-0">
