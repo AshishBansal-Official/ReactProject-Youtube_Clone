@@ -13,11 +13,15 @@
         /* Variables */
         --header-height: 3.5rem;
         --min-sidebar-width: 4.5rem;
-        --sidebar-width: 16rem;
+        --sidebar-width: 15rem;
     }
 }
 
 @layer utilities {
+    .scrollbar-none::-webkit-scrollbar {
+        display: none;
+    }
+
     :root::-webkit-scrollbar,
     .scrollbar::-webkit-scrollbar {
         background-color: transparent;
@@ -40,7 +44,7 @@
         background-color: transparent;
     }
     .root:hover::-webkit-scrollbar-thumb,
-    .scrollbar::-webkit-scrollbar-thumb {
+    .scrollbar:hover::-webkit-scrollbar-thumb {
         background-color: #666 !important;
     }
 }

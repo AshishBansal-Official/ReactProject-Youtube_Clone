@@ -16,8 +16,8 @@ const Footer = () => {
         "Test new features",
     ];
     return (
-        <div className="text-text-secondary leading-[1.125rem]">
-            <div className="pt-4 px-6 flex flex-wrap">
+        <div className="text-text-secondary leading-[1.125rem] pl-6 pr-2">
+            <div className="pt-4 flex flex-wrap">
                 {contentPrimary.map((content, index) => {
                     return (
                         <span
@@ -29,7 +29,7 @@ const Footer = () => {
                     );
                 })}
             </div>
-            <div className="pt-3 px-6 flex flex-wrap">
+            <div className="pt-3 flex flex-wrap">
                 {contentSecondary.map((content, index) => {
                     return (
                         <span
@@ -41,7 +41,7 @@ const Footer = () => {
                     );
                 })}
             </div>
-            <div className="py-4 px-6 text-text-disabled text-xs">
+            <div className="py-4 text-text-disabled text-xs">
                 &copy; 2023 Ashish Bansal
             </div>
         </div>

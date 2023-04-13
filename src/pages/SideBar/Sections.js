@@ -208,7 +208,7 @@ const Sections = () => {
         <div className="w-full">
             {sectionsList.map((section, index) => {
                 return (
-                    <div key={index} className="pr-4">
+                    <div key={index} className="">
                         {section.hasSections ? (
                             <div className="p-3 border-b-[1.5px] border-b-overlay-2">
                                 {section.title && (

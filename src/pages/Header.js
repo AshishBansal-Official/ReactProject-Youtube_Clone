@@ -29,7 +29,7 @@ const Header = () => {
                     </div>
                 </div>
                 {/* // center */}
-                <div className="flex items-center flex-grow-0 flex-[728px]">
+                <div className="flex items-center flex-grow-0 flex-[728px] mr-4">
                     {/* search */}
                     <div className="flex flex-grow ml-10 p-1">
                         <form
@@ -38,7 +38,7 @@ const Header = () => {
                         >
                             <input
                                 type="text"
-                                className="text-base placeholder-text-secondary font-normal h-10 w-[calc(100%-2.5rem)] rounded-l-full ml-10  pl-4 pr-1 outline-none border border-dark-4 border-r-0 bg-dark-0"
+                                className="text-base placeholder-text-secondary font-normal h-10 w-[calc(100%-2rem)] rounded-l-full ml-8  pl-4 pr-1 outline-none border border-dark-4 border-r-0 bg-dark-0"
                                 placeholder="Search"
                             />
                         </form>
