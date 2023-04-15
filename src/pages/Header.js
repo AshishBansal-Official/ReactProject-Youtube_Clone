@@ -1,21 +1,40 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import menu_icon from "../images/header/icons/menu_icon.svg";
 import logo_icon from "../images/header/icons/logo_icon.svg";
 import search_icon from "../images/header/icons/search_icon.svg";
 import mic_icon from "../images/header/icons/mic_icon.svg";
 import more_vert_icon from "../images/header/icons/more_vert_icon.svg";
+import cancel_icon from "../images/header/icons/cancel_icon.svg";
 
 import { SVGRenderer } from "../components/SVGRenderer";
 import SignInButton from "../components/SignInButton";
+import SideBarContext from "../utils/contexts/SideBarContext";
+import OverlayContext from "../utils/contexts/OverlayContext";
 
 const Header = () => {
+    const [value, setValue] = useState("");
+    const [isFocused, setIsFocused] = useState(false);
+    const { setShowSideBar } = useContext(SideBarContext);
+    const { setShowOverlay } = useContext(OverlayContext);
+
     return (
-        <div className="fixed top-0 w-full z-50 bg-app-bg">
+        <div className="fixed top-0 w-full z-40 bg-app-bg">
             <div className="h-[var(--header-height)] w-full px-4 flex items-center justify-between">
                 {/* // start */}
                 <div className="flex items-center justify-center shrink-0">
-                    <SVGRenderer small src={menu_icon} className="m-2" />
-                    <div className="flex p-4">
+                    <SVGRenderer
+                        small
+                        src={menu_icon}
+                        className="rounded-full hover:bg-overlay-1 active:bg-overlay-2 cursor-pointer p-2"
+                        onClick={() => {
+                            document.body.clientWidth > 1352
+                                ? setShowSideBar((showSideBar) => {
+                                      return !showSideBar;
+                                  })
+                                : setShowOverlay((showOverlay) => !showOverlay);
+                        }}
+                    />
+                    <div className="flex pl-4">
                         <div className="min-h-5 h-5 aspect-auto">
                             <img
                                 src={logo_icon}
@@ -29,30 +48,63 @@ const Header = () => {
                     </div>
                 </div>
                 {/* // center */}
-                <div className="flex items-center flex-grow-0 flex-[728px] mr-4">
+                <div className="flex items-center flex-grow-0 flex-[728px] h-full py-2 pl-10 app-xs:hidden">
                     {/* search */}
-                    <div className="flex flex-grow ml-10 p-1">
-                        <form
-                            action=""
-                            className="h-10 flex-grow rounded-l-full "
-                        >
+                    <div
+                        className={`flex flex-grow h-full items-center rounded-l-full border ${
+                            isFocused
+                                ? "bg-transparent border-app-blue"
+                                : " bg-dark-0 ml-9 border-dark-4"
+                        }`}
+                    >
+                        <form className="h-full flex items-center justify-end flex-grow rounded-l-full">
+                            {isFocused && (
+                                <SVGRenderer
+                                    small
+                                    size={5}
+                                    src={search_icon}
+                                    className="ml-4"
+                                />
+                            )}
                             <input
                                 type="text"
-                                className="text-base placeholder-text-secondary font-normal h-10 w-[calc(100%-2rem)] rounded-l-full ml-8  pl-4 pr-1 outline-none border border-dark-4 border-r-0 bg-dark-0"
+                                className="w-full rounded-l-full h-full outline-none text-base bg-transparent placeholder-text-secondary font-normal pl-4 pr-1"
                                 placeholder="Search"
+                                value={value}
+                                onChange={(e) => setValue(e.target.value)}
+                                onFocus={() => setIsFocused(true)}
+                                onBlur={() => setIsFocused(false)}
                             />
+                            {value.length !== 0 && (
+                                <SVGRenderer
+                                    src={cancel_icon}
+                                    small
+                                    className={``}
+                                />
+                            )}
                         </form>
-                        <div className="bg-overlay-0 h-10 w-16 rounded-r-full flex items-center justify-center border border-dark-4">
-                            <SVGRenderer small src={search_icon} />
-                        </div>
                     </div>
-                    <div className="bg-dark-1 rounded-full ml-1 p-2">
+                    <div className="bg-overlay-0 h-full w-16 flex-shrink-0 rounded-r-full flex items-center justify-center border border-l-0 border-dark-4">
+                        <SVGRenderer small src={search_icon} />
+                    </div>
+                    <div className="bg-dark-1 flex-shrink-0 rounded-full ml-2 p-2 ">
                         <SVGRenderer small src={mic_icon} />
                     </div>
                 </div>
                 {/* // end */}
-                <div className="flex items-center justify-end min-w-[225px]">
-                    <SVGRenderer src={more_vert_icon} className="mr-2" />
+                <div className="flex items-center justify-end app-xs:min-w-0 min-w-[220px]">
+                    <SVGRenderer
+                        src={search_icon}
+                        className="app-xs:mr-0 mr-1 app-xs:block hidden rounded-full hover:bg-overlay-1 active:bg-overlay-2 cursor-pointer"
+                    />
+                    <SVGRenderer
+                        src={mic_icon}
+                        className="bg-dark-3 app-xs:block hidden app-xxs:hidden"
+                    />
+                    <SVGRenderer
+                        src={more_vert_icon}
+                        className="app-xs:mr-0 mr-2 active:bg-overlay-1 cursor-pointer rounded-full"
+                    />
                     <SignInButton />
                 </div>
             </div>

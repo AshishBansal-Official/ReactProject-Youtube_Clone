@@ -1,12 +1,18 @@
-export const SVGRenderer = ({ src, className = "", size = 10, small }) => {
-    size = small ? 6 : size;
+export const SVGRenderer = ({
+    src,
+    className = "",
+    size = 6,
+    small,
+    p = 2,
+    onClick = () => {},
+}) => {
+    const s = `${(size * 4).toString()}px`;
     return (
         <div
-            className={`h-${size} w-${size} p-${
-                small ? 0 : 2
-            } min-w-fit ${className}`}
+            className={`${small ? "" : `p-${p}`} ${className}`}
+            onClick={onClick}
         >
-            <img src={src} alt="" className="w-full h-full" />
+            <img src={src} alt="" height={s} width={s} />
         </div>
     );
 };

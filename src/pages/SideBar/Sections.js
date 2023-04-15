@@ -224,7 +224,7 @@ const Sections = () => {
                                         >
                                             <SVGRenderer
                                                 src={tile.icon}
-                                                className="pr-6"
+                                                className="mr-4"
                                             />
                                             <span>{tile.name}</span>
                                         </div>

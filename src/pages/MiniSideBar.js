@@ -39,13 +39,9 @@ const tiles = [
     },
 ];
 
-const MiniSideBar = ({ show = false }) => {
+const MiniSideBar = () => {
     return (
-        <div
-            className={`fixed z-40 top-[calc(var(--header-height)+4px)] left-0 bottom-0 w-[var(--min-sidebar-width)] flex-col items-center ${
-                show ? "flex" : "hidden"
-            }`}
-        >
+        <div className="fixed z-20 top-[calc(var(--header-height)+4px)] left-0 bottom-0 w-[var(--min-sidebar-width)] flex-col items-center flex app-sm:hidden">
             {tiles &&
                 tiles.map((tile) => {
                     return (

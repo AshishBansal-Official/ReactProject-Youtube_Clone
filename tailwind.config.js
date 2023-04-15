@@ -6,8 +6,16 @@ module.exports = {
             roboto: ["Roboto"],
         },
         extend: {
+            screens: {
+                "app-min-md": "1352px",
+                "app-md": { max: "1352px" },
+                "app-sm": { max: "824px" },
+                "app-xs": { max: "656px" },
+                "app-xxs": { max: "450px" },
+            },
             colors: {
                 "app-bg": "#0f0f0f",
+                "app-blue": "#3EA6FF",
                 "dark-0": "#121212",
                 "dark-1": "#181818",
                 "dark-2": "#212121",
