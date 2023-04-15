@@ -18,6 +18,12 @@
     }
 }
 
+/* @layer components {
+    .wrapper-width {
+        @apply w-[calc(100%-var(--sidebar-width))] app-md:w-[calc(100%-var(--min-sidebar-width))] app-sm:w-full;
+    }
+} */
+
 @layer utilities {
     .scrollbar-none::-webkit-scrollbar {
         display: none;

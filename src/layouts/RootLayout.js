@@ -31,11 +31,11 @@ const RootLayout = () => {
                     {showSideBar && <SideBar></SideBar>}
                     <MiniSideBar></MiniSideBar>
                     <div
-                        className={`mt-[var(--header-height)] app-md:ml-[var(--min-sidebar-width)] app-sm:ml-0 ml-[var(--sidebar-width)] w-[calc(100%-var(--sidebar-width))] app-md:w-[calc(100%-var(--min-sidebar-width))] app-sm:w-full overflow-x-hidden ${
+                        className={`mt-[var(--header-height)] app-md:ml-[var(--min-sidebar-width)] app-sm:ml-0 overflow-x-hidden ${
                             showSideBar
-                                ? "w-[calc(100%-var(--sidebar-width))]"
-                                : "ml-[var(--min-sidebar-width)] w-[calc(100%-var(--min-sidebar-width))]"
-                        } `}
+                                ? "ml-[var(--sidebar-width)]"
+                                : "ml-[var(--min-sidebar-width)]"
+                        }`}
                     >
                         <Outlet></Outlet>
                     </div>

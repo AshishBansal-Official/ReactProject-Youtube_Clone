@@ -32,6 +32,7 @@ const Header = () => {
 
     useEffect(() => {
         if (windowWidth > 656) setShowSearchBar(false);
+        else setShowSearchBar(false);
     }, [windowWidth]);
 
     return (
@@ -89,7 +90,7 @@ const Header = () => {
                         className={`flex flex-grow h-full items-center rounded-l-full border ${
                             isFocused
                                 ? "bg-transparent border-app-blue"
-                                : " bg-dark-0 ml-[2.125rem] border-dark-4"
+                                : " bg-dark-0 ml-9 border-dark-4"
                         }`}
                     >
                         <form className="h-full flex items-center justify-end flex-grow rounded-l-full">
@@ -113,7 +114,7 @@ const Header = () => {
                             {value.length !== 0 && (
                                 <SVGRenderer
                                     src={cancel_icon}
-                                    className={`flex-shrink-0 cursor-pointer rounded-full hover:bg-overlay-1 active:bg-overlay-2 -m-1`}
+                                    className={`cursor-pointer rounded-full hover:bg-overlay-1 active:bg-overlay-2 -m-1`}
                                     onClick={() => {
                                         setValue("");
                                     }}
