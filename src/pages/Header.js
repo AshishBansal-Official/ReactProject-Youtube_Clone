@@ -1,10 +1,11 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import menu_icon from "../images/header/icons/menu_icon.svg";
 import logo_icon from "../images/header/icons/logo_icon.svg";
 import search_icon from "../images/header/icons/search_icon.svg";
 import mic_icon from "../images/header/icons/mic_icon.svg";
 import more_vert_icon from "../images/header/icons/more_vert_icon.svg";
 import cancel_icon from "../images/header/icons/cancel_icon.svg";
+import arrow_back_icon from "../images/header/icons/arrow_back_icon.svg";
 
 import { SVGRenderer } from "../components/SVGRenderer";
 import SignInButton from "../components/SignInButton";
@@ -17,44 +18,78 @@ const Header = () => {
     const { setShowSideBar } = useContext(SideBarContext);
     const { setShowOverlay } = useContext(OverlayContext);
 
+    const [showSearchBar, setShowSearchBar] = useState(false);
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+    const updateWindowWidth = () => {
+        setWindowWidth(window.innerWidth);
+    };
+
+    useEffect(() => {
+        window.addEventListener("resize", updateWindowWidth);
+        return () => window.removeEventListener("resize", updateWindowWidth);
+    }, []);
+
+    useEffect(() => {
+        if (windowWidth > 656) setShowSearchBar(false);
+    }, [windowWidth]);
+
     return (
         <div className="fixed top-0 w-full z-40 bg-app-bg">
             <div className="h-[var(--header-height)] w-full px-4 flex items-center justify-between">
                 {/* // start */}
-                <div className="flex items-center justify-center shrink-0">
+                {showSearchBar ? (
                     <SVGRenderer
-                        small
-                        src={menu_icon}
-                        className="rounded-full hover:bg-overlay-1 active:bg-overlay-2 cursor-pointer p-2"
+                        src={arrow_back_icon}
+                        className="-ml-2 shrink-0 rounded-full cursor-pointer hover:bg-overlay-1 active:bg-overlay-2"
                         onClick={() => {
-                            document.body.clientWidth > 1352
-                                ? setShowSideBar((showSideBar) => {
-                                      return !showSideBar;
-                                  })
-                                : setShowOverlay((showOverlay) => !showOverlay);
+                            setShowSearchBar(false);
                         }}
                     />
-                    <div className="flex pl-4">
-                        <div className="min-h-5 h-5 aspect-auto">
-                            <img
-                                src={logo_icon}
-                                alt="logo"
-                                className="w-full h-full"
-                            />
+                ) : (
+                    <div className="flex items-center justify-center shrink-0">
+                        <SVGRenderer
+                            small
+                            src={menu_icon}
+                            className="rounded-full hover:bg-overlay-1 active:bg-overlay-2 cursor-pointer p-2"
+                            onClick={() => {
+                                document.body.clientWidth > 1352
+                                    ? setShowSideBar((showSideBar) => {
+                                          return !showSideBar;
+                                      })
+                                    : setShowOverlay(
+                                          (showOverlay) => !showOverlay
+                                      );
+                            }}
+                        />
+                        <div className="flex pl-4">
+                            <div className="min-h-5 h-5 aspect-auto">
+                                <img
+                                    src={logo_icon}
+                                    alt="logo"
+                                    className="w-full h-full"
+                                />
+                            </div>
+                            <span className="-mt-2.5 mx-1 text-[10px] font-thin">
+                                IN
+                            </span>
                         </div>
-                        <span className="-mt-2.5 mx-1 text-[10px] font-thin">
-                            IN
-                        </span>
                     </div>
-                </div>
+                )}
                 {/* // center */}
-                <div className="flex items-center flex-grow-0 flex-[728px] h-full py-2 pl-10 app-xs:hidden">
+                <div
+                    className={`flex items-center flex-grow-0 flex-[728px] h-full py-2 ${
+                        showSearchBar
+                            ? "app-xs:flex flex pl-2"
+                            : "app-xs:hidden pl-10  ml-2"
+                    }`}
+                >
                     {/* search */}
                     <div
                         className={`flex flex-grow h-full items-center rounded-l-full border ${
                             isFocused
                                 ? "bg-transparent border-app-blue"
-                                : " bg-dark-0 ml-9 border-dark-4"
+                                : " bg-dark-0 ml-[2.125rem] border-dark-4"
                         }`}
                     >
                         <form className="h-full flex items-center justify-end flex-grow rounded-l-full">
@@ -68,7 +103,7 @@ const Header = () => {
                             )}
                             <input
                                 type="text"
-                                className="w-full rounded-l-full h-full outline-none text-base bg-transparent placeholder-text-secondary font-normal pl-4 pr-1"
+                                className="w-full rounded-l-full h-full outline-none text-base bg-transparent placeholder-text-secondary font-normal pl-4"
                                 placeholder="Search"
                                 value={value}
                                 onChange={(e) => setValue(e.target.value)}
@@ -78,8 +113,10 @@ const Header = () => {
                             {value.length !== 0 && (
                                 <SVGRenderer
                                     src={cancel_icon}
-                                    small
-                                    className={``}
+                                    className={`flex-shrink-0 cursor-pointer rounded-full hover:bg-overlay-1 active:bg-overlay-2 -m-1`}
+                                    onClick={() => {
+                                        setValue("");
+                                    }}
                                 />
                             )}
                         </form>
@@ -87,15 +124,26 @@ const Header = () => {
                     <div className="bg-overlay-0 h-full w-16 flex-shrink-0 rounded-r-full flex items-center justify-center border border-l-0 border-dark-4">
                         <SVGRenderer small src={search_icon} />
                     </div>
-                    <div className="bg-dark-1 flex-shrink-0 rounded-full ml-2 p-2 ">
+                    <div
+                        className={`bg-dark-1 flex-shrink-0 ml-2 p-2 ${
+                            showSearchBar ? "-mr-2 bg-dark-2" : "rounded-full"
+                        }`}
+                    >
                         <SVGRenderer small src={mic_icon} />
                     </div>
                 </div>
                 {/* // end */}
-                <div className="flex items-center justify-end app-xs:min-w-0 min-w-[220px]">
+                <div
+                    className={`flex items-center justify-end app-xs:min-w-0 min-w-[220px] ${
+                        showSearchBar ? "hidden" : ""
+                    }`}
+                >
                     <SVGRenderer
                         src={search_icon}
-                        className="app-xs:mr-0 mr-1 app-xs:block hidden rounded-full hover:bg-overlay-1 active:bg-overlay-2 cursor-pointer"
+                        className=" mr-1 app-xs:block hidden rounded-full hover:bg-overlay-1 active:bg-overlay-2 cursor-pointer"
+                        onClick={() => {
+                            setShowSearchBar(true);
+                        }}
                     />
                     <SVGRenderer
                         src={mic_icon}
