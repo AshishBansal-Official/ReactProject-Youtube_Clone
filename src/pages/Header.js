@@ -12,7 +12,11 @@ import SignInButton from "../components/SignInButton";
 import SideBarContext from "../utils/contexts/SideBarContext";
 import OverlayContext from "../utils/contexts/OverlayContext";
 
+import { useDispatch } from "react-redux";
+import { authUser } from "../services/redux/slices/userSlice";
+
 const Header = () => {
+    const dispatch = useDispatch();
     const [value, setValue] = useState("");
     const [isFocused, setIsFocused] = useState(false);
     const { setShowSideBar } = useContext(SideBarContext);
@@ -154,7 +158,11 @@ const Header = () => {
                         src={more_vert_icon}
                         className="app-xs:mr-0 mr-2 active:bg-overlay-1 cursor-pointer rounded-full"
                     />
-                    <SignInButton />
+                    <SignInButton
+                        onClick={() => {
+                            dispatch(authUser());
+                        }}
+                    />
                 </div>
             </div>
         </div>

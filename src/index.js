@@ -7,6 +7,8 @@ import RootLayout from "./layouts/RootLayout";
 
 // Pages
 import Home from "./pages/home/Home";
+import { Provider } from "react-redux";
+import store from "./services/redux/store";
 
 const appRouter = createBrowserRouter([
     {
@@ -22,4 +24,8 @@ const appRouter = createBrowserRouter([
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<RouterProvider router={appRouter} />);
+root.render(
+    <Provider store={store}>
+        <RouterProvider router={appRouter} />
+    </Provider>
+);
