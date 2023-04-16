@@ -1,5 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false">
-    <g fill="white">
-        <path d="M14,3H5v18h1v-9h6.6l0.4,2h7V5h-5.6L14,3L14,3z"></path>
-    </g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path style="stroke:none;fill-rule:nonzero;fill:#fff;fill-opacity:1" d="M14 3H5v18h1v-9h6.602L13 14h7V5h-5.602zm0 0"/></svg>
