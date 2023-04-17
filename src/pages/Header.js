@@ -1,22 +1,22 @@
 import React, { useContext, useEffect, useState } from "react";
 import menu_icon from "../images/header/icons/menu_icon.svg";
 import logo_icon from "../images/header/icons/logo_icon.svg";
+import arrow_back_icon from "../images/header/icons/arrow_back_icon.svg";
 import search_icon from "../images/header/icons/search_icon.svg";
+import cancel_icon from "../images/header/icons/cancel_icon.svg";
 import mic_icon from "../images/header/icons/mic_icon.svg";
 import more_vert_icon from "../images/header/icons/more_vert_icon.svg";
-import cancel_icon from "../images/header/icons/cancel_icon.svg";
-import arrow_back_icon from "../images/header/icons/arrow_back_icon.svg";
+import create_icon from "../images/header/icons/create_icon.svg";
+import notifications_icon from "../images/header/icons/notifications_icon.svg";
 
 import { SVGRenderer } from "../components/SVGRenderer";
 import SignInButton from "../components/SignInButton";
 import SideBarContext from "../utils/contexts/SideBarContext";
 import OverlayContext from "../utils/contexts/OverlayContext";
-
-import { useDispatch } from "react-redux";
-import { authUser } from "../services/redux/slices/userSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { logoutUser } from "../services/redux/slices/authSlice";
 
 const Header = () => {
-    const dispatch = useDispatch();
     const [value, setValue] = useState("");
     const [isFocused, setIsFocused] = useState(false);
     const { setShowSideBar } = useContext(SideBarContext);
@@ -24,6 +24,10 @@ const Header = () => {
 
     const [showSearchBar, setShowSearchBar] = useState(false);
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+    const dispatch = useDispatch();
+
+    const user = useSelector((store) => store.auth.user);
 
     const updateWindowWidth = () => {
         setWindowWidth(window.innerWidth);
@@ -83,10 +87,10 @@ const Header = () => {
                 )}
                 {/* // center */}
                 <div
-                    className={`flex items-center flex-grow-0 flex-[728px] h-full py-2 ${
+                    className={`flex items-center flex-grow-0 flex-[728px] h-full py-2  ${
                         showSearchBar
                             ? "app-xs:flex flex pl-2"
-                            : "app-xs:hidden pl-10  ml-2"
+                            : "app-xs:hidden pl-10"
                     }`}
                 >
                     {/* search */}
@@ -141,7 +145,7 @@ const Header = () => {
                 <div
                     className={`flex items-center justify-end app-xs:min-w-0 min-w-[220px] ${
                         showSearchBar ? "hidden" : ""
-                    }`}
+                    } ${user != null ? "mr-3.5 -ml-3.5" : ""}`}
                 >
                     <SVGRenderer
                         src={search_icon}
@@ -154,15 +158,42 @@ const Header = () => {
                         src={mic_icon}
                         className="bg-dark-3 app-xs:block hidden app-xxs:hidden"
                     />
-                    <SVGRenderer
-                        src={more_vert_icon}
-                        className="app-xs:mr-0 mr-2 active:bg-overlay-1 cursor-pointer rounded-full"
-                    />
-                    <SignInButton
-                        onClick={() => {
-                            dispatch(authUser());
-                        }}
-                    />
+                    {user != null ? (
+                        <>
+                            <SVGRenderer
+                                src={create_icon}
+                                className="app-xs:mr-0 mr-2 active:bg-overlay-1 cursor-pointer rounded-full"
+                            />
+                            <SVGRenderer
+                                src={notifications_icon}
+                                className="app-xs:mr-0 mr-[1.375rem] active:bg-overlay-1 cursor-pointer rounded-full"
+                            />
+                        </>
+                    ) : (
+                        <SVGRenderer
+                            src={more_vert_icon}
+                            className="app-xs:mr-0 mr-2 active:bg-overlay-1 cursor-pointer rounded-full"
+                        />
+                    )}
+                    {user != null ? (
+                        <div
+                            className="h-8 w-8 rounded-full cursor-pointer group"
+                            onClick={() => {
+                                dispatch(logoutUser());
+                            }}
+                        >
+                            <img
+                                src={user.photoURL}
+                                alt="user"
+                                className="h-8 w-8 rounded-full"
+                            />
+                            <div className="absolute top-[3rem] right-2 rounded-lg bg-overlay-2 p-2 hidden group-hover:block">
+                                Logout
+                            </div>
+                        </div>
+                    ) : (
+                        <SignInButton />
+                    )}
                 </div>
             </div>
         </div>

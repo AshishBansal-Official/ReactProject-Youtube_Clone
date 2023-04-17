@@ -12,6 +12,11 @@ import library_outline from "../../images/sidebar/icons/library_outline.svg";
 import library_filled from "../../images/sidebar/icons/library_filled.svg";
 import history_outline from "../../images/sidebar/icons/history_outline.svg";
 import history_filled from "../../images/sidebar/icons/history_filled.svg";
+import your_videos from "../../images/sidebar/icons/your_videos.svg";
+import watch_later_outline from "../../images/sidebar/icons/watch_later_outline.svg";
+import watch_later_filled from "../../images/sidebar/icons/watch_later_filled.svg";
+import liked_videos_outline from "../../images/sidebar/icons/liked_videos_outline.svg";
+import liked_videos_filled from "../../images/sidebar/icons/liked_videos_filled.svg";
 
 // Explore section
 import trending_outline from "../../images/sidebar/explore/icons/trending_outline.svg";
@@ -39,6 +44,7 @@ import browse_channels_icon from "../../images/sidebar/icons/browse_channels_ico
 
 // More from YouTube section
 import youtube_premium_icon from "../../images/sidebar/more/icons/youtube_premium_icon.svg";
+import youtube_studio_icon from "../../images/sidebar/more/icons/youtube_studio_icon.svg";
 import youtube_music_icon from "../../images/sidebar/more/icons/youtube_music_icon.svg";
 import youtube_kids_icon from "../../images/sidebar/more/icons/youtube_kids_icon.svg";
 
@@ -46,10 +52,12 @@ import settings_icon from "../../images/sidebar/icons/settings_icon.svg";
 import report_history_icon from "../../images/sidebar/icons/report_history_icon.svg";
 import help_icon from "../../images/sidebar/icons/help_icon.svg";
 import send_feedback_icon from "../../images/sidebar/icons/send_feedback_icon.svg";
+import { useSelector } from "react-redux";
 
 const sectionsList = [
     {
         title: "",
+        showOnSignIn: true,
         hasSections: true,
         sections: [
             {
@@ -71,6 +79,7 @@ const sectionsList = [
     },
     {
         title: "",
+        showOnSignIn: true,
         hasSections: true,
         sections: [
             {
@@ -83,10 +92,28 @@ const sectionsList = [
                 icon: history_outline,
                 active_icon: history_filled,
             },
+            {
+                name: "Your Videos",
+                showOnSignIn: true,
+                icon: your_videos,
+            },
+            {
+                name: "Watch Later",
+                showOnSignIn: true,
+                icon: watch_later_outline,
+                active_icon: watch_later_filled,
+            },
+            {
+                name: "Liked Videos",
+                showOnSignIn: true,
+                icon: liked_videos_outline,
+                active_icon: liked_videos_filled,
+            },
         ],
     },
     {
         title: "",
+        showOnSignIn: false,
         hasSections: false,
         component: (
             <div className="px-4">
@@ -98,6 +125,7 @@ const sectionsList = [
     },
     {
         title: "Explore",
+        showOnSignIn: true,
         hasSections: true,
         sections: [
             {
@@ -154,6 +182,7 @@ const sectionsList = [
     },
     {
         title: "",
+        showOnSignIn: false,
         hasSections: true,
         sections: [
             {
@@ -164,11 +193,17 @@ const sectionsList = [
     },
     {
         title: "More from YouTube",
+        showOnSignIn: true,
         hasSections: true,
         sections: [
             {
                 name: "Youtube Premium",
                 icon: youtube_premium_icon,
+            },
+            {
+                name: "Youtube Studio",
+                showOnSignIn: true,
+                icon: youtube_studio_icon,
             },
             {
                 name: "Youtube Music",
@@ -183,6 +218,7 @@ const sectionsList = [
     {
         title: "",
         hasSections: true,
+        showOnSignIn: true,
         sections: [
             {
                 name: "Settings",
@@ -204,10 +240,14 @@ const sectionsList = [
     },
 ];
 const Sections = () => {
+    const user = useSelector((store) => store.auth.user);
+
     return (
         <div className="w-full">
             {sectionsList.map((section, index) => {
-                return (
+                return user != null && !section.showOnSignIn ? (
+                    ""
+                ) : (
                     <div key={index} className="">
                         {section.hasSections ? (
                             <div className="p-3 border-b-[1.5px] border-b-overlay-2">
@@ -217,7 +257,10 @@ const Sections = () => {
                                     </div>
                                 )}
                                 {section?.sections?.map((tile) => {
-                                    return (
+                                    return user == null &&
+                                        "showOnSignIn" in tile ? (
+                                        ""
+                                    ) : (
                                         <div
                                             key={tile.name}
                                             className="flex items-center justify-start px-1 rounded-lg"
