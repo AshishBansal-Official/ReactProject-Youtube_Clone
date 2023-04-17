@@ -3,7 +3,9 @@ import { auth, provider } from "../../firebase";
 import { signInWithPopup, signOut } from "firebase/auth";
 
 export const loginUser = createAsyncThunk("user/login", async () => {
+    provider.addScope("https://www.googleapis.com/auth/youtube.force-ssl"); // Scope for youtube api
     const result = await signInWithPopup(auth, provider);
+    console.log(result);
     return result;
 });
 

@@ -1,18 +1,20 @@
-const VideoDetail = () => {
+const VideoDetail = ({ channelIcon, title, channel, views, release }) => {
     return (
         <div className="mt-3 flex">
-            <div className="h-9 aspect-square rounded-full mr-3 bg-blue-200"></div>
+            <div className="h-9 aspect-square rounded-full mr-3 bg-blue-200">
+                <img
+                    src={channelIcon}
+                    alt=""
+                    className="h-full w-full rounded-full"
+                />
+            </div>
             <div className="flex flex-col">
                 <span className="text-base leading-[1.4] font-medium line-clamp-2">
-                    SIDHU MOOSE WALA : Mera Na (Official Video) Feat. Burna Boy
-                    & Steel Banglez | Navkaran Brar by Sidhu Moose Wala 6 days
-                    ago 3 minutes, 21 seconds 26,986,631 views
+                    {title}
                 </span>
-                <span className="text-text-secondary mt-1">
-                    Sidhu Moose Wala
-                </span>
+                <span className="text-text-secondary mt-1">{channel}</span>
                 <span className="text-text-secondary text-sm">
-                    26M views . 6 days ago
+                    {views} views • {release}
                 </span>
             </div>
         </div>

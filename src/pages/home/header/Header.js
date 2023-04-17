@@ -57,7 +57,7 @@ const Header = () => {
 
     return (
         <div
-            className={`fixed bg-app-bg app-header w-[calc(100%-var(--min-sidebar-width))] ${
+            className={`fixed z-10 bg-app-bg app-header w-[calc(100%-var(--min-sidebar-width))] ${
                 showSideBar && adjustWidth
                     ? " w-[calc(100%-var(--sidebar-width))]"
                     : ""
