@@ -4,6 +4,8 @@ import Chip from "./Chip";
 import { SVGRenderer } from "../../../components/SVGRenderer";
 import slider_left_arrow from "../../../images/icons/slider_left_arrow.svg";
 import slider_right_arrow from "../../../images/icons/slider_right_arrow.svg";
+import { useDispatch } from "react-redux";
+import { getVideosByCategory } from "../../../services/redux/slices/homeVideosSlice";
 
 const chips = [
     "All",
@@ -32,6 +34,14 @@ const Header = () => {
     const listRef = useRef(null);
     const [showLeftButton, setshowLeftButton] = useState(false);
     const [showRightButton, setshowRightButton] = useState(false);
+
+    const [activeElement, setActiveElement] = useState("All");
+    const dispatch = useDispatch();
+
+    const handleClick = (category) => {
+        setActiveElement(category);
+        dispatch(getVideosByCategory({ category: category }));
+    };
 
     // Show / hide slider buttons at start
     useEffect(() => {
@@ -100,7 +110,14 @@ const Header = () => {
                 }}
             >
                 {chips.map((chip) => {
-                    return <Chip key={chip} name={chip}></Chip>;
+                    return (
+                        <Chip
+                            key={chip}
+                            name={chip}
+                            onClick={() => handleClick(chip)}
+                            active={chip === activeElement}
+                        ></Chip>
+                    );
                 })}
             </div>
             {/* Right button */}

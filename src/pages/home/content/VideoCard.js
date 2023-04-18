@@ -26,6 +26,8 @@ const VideoCard = ({ video }) => {
     const seconds = moment.duration(duration).asSeconds();
     const _duration = moment.utc(seconds * 1000).format("mm:ss");
 
+    const _videoId = id?.videoId || id;
+
     useEffect(() => {
         // We are making an extra api call to maintain the data consistency since the video prop passed is not consistent
         const getVideoDetails = async () => {
@@ -34,14 +36,14 @@ const VideoCard = ({ video }) => {
             } = await api("/videos", {
                 params: {
                     part: "contentDetails,statistics",
-                    id: id,
+                    id: _videoId,
                 },
             });
             setDuration(items[0]?.contentDetails?.duration);
             setViews(items[0]?.statistics?.viewCount);
         };
         getVideoDetails();
-    }, [id]);
+    }, [_videoId]);
 
     useEffect(() => {
         const getChannelIcon = async () => {

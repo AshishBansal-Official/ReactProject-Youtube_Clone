@@ -11,7 +11,7 @@ const Content = () => {
                         videos.map((video) => {
                             return (
                                 <VideoCard
-                                    key={video.id}
+                                    key={video.id?.videoId || video.id}
                                     video={video}
                                 ></VideoCard>
                             );

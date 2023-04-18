@@ -1,12 +1,20 @@
+import { useState } from "react";
+
 const VideoDetail = ({ channelIcon, title, channel, views, release }) => {
+    const [hide, setHide] = useState(false);
     return (
         <div className="mt-3 flex">
-            <div className="h-9 aspect-square rounded-full mr-3 bg-blue-200">
-                <img
-                    src={channelIcon}
-                    alt=""
-                    className="h-full w-full rounded-full"
-                />
+            <div className="h-9 aspect-square rounded-full mr-3 bg-overlay-2">
+                {hide ? (
+                    ""
+                ) : (
+                    <img
+                        src={channelIcon}
+                        alt=""
+                        className="h-full w-full rounded-full"
+                        onError={() => setHide(true)}
+                    />
+                )}
             </div>
             <div className="flex flex-col">
                 <span className="text-base leading-[1.4] font-medium line-clamp-2">
