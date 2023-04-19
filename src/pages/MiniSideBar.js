@@ -10,6 +10,8 @@ import library_filled from "../images/sidebar/icons/library_filled.svg";
 import history_filled from "../images/sidebar/icons/history_filled.svg";
 
 import { SVGRenderer } from "../components/SVGRenderer";
+import { useContext } from "react";
+import IsWatchScreenContext from "../utils/contexts/IsWatchScreenContext";
 
 const tiles = [
     {
@@ -40,8 +42,14 @@ const tiles = [
 ];
 
 const MiniSideBar = () => {
+    const { isWatchScreen } = useContext(IsWatchScreenContext);
+
     return (
-        <div className="fixed z-20 top-[calc(var(--header-height)+4px)] left-0 bottom-0 w-[var(--min-sidebar-width)] flex-col items-center flex app-sm:hidden">
+        <div
+            className={`fixed z-20 top-[calc(var(--header-height)+4px)] left-0 bottom-0 w-[var(--min-sidebar-width)] flex-col items-center flex app-sm:hidden ${
+                isWatchScreen ? "hidden" : ""
+            }`}
+        >
             {tiles &&
                 tiles.map((tile) => {
                     return (

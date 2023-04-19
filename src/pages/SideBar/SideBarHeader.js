@@ -4,10 +4,12 @@ import logo_icon from "../../images/header/icons/logo_icon.svg";
 import { useContext } from "react";
 import SideBarContext from "../../utils/contexts/SideBarContext";
 import OverlayContext from "../../utils/contexts/OverlayContext";
+import IsWatchScreenContext from "../../utils/contexts/IsWatchScreenContext";
 
 const SideBarHeader = () => {
     const { setShowSideBar } = useContext(SideBarContext);
     const { setShowOverlay } = useContext(OverlayContext);
+    const { isWatchScreen } = useContext(IsWatchScreenContext);
 
     return (
         <div>
@@ -17,7 +19,9 @@ const SideBarHeader = () => {
                     src={menu_icon}
                     className="rounded-full hover:bg-overlay-1 active:bg-overlay-2 cursor-pointer p-2"
                     onClick={() => {
-                        document.body.clientWidth > 1352
+                        isWatchScreen
+                            ? setShowOverlay((showOverlay) => !showOverlay)
+                            : document.body.clientWidth > 1352
                             ? setShowSideBar((showSideBar) => {
                                   return !showSideBar;
                               })

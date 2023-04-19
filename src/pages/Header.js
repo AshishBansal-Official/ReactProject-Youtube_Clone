@@ -15,12 +15,14 @@ import SideBarContext from "../utils/contexts/SideBarContext";
 import OverlayContext from "../utils/contexts/OverlayContext";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "../services/redux/slices/authSlice";
+import IsWatchScreenContext from "../utils/contexts/IsWatchScreenContext";
 
 const Header = () => {
     const [value, setValue] = useState("");
     const [isFocused, setIsFocused] = useState(false);
     const { setShowSideBar } = useContext(SideBarContext);
     const { setShowOverlay } = useContext(OverlayContext);
+    const { isWatchScreen } = useContext(IsWatchScreenContext);
 
     const [showSearchBar, setShowSearchBar] = useState(false);
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -62,7 +64,11 @@ const Header = () => {
                             src={menu_icon}
                             className="rounded-full hover:bg-overlay-1 active:bg-overlay-2 cursor-pointer p-2"
                             onClick={() => {
-                                document.body.clientWidth > 1352
+                                isWatchScreen
+                                    ? setShowOverlay(
+                                          (showOverlay) => !showOverlay
+                                      )
+                                    : document.body.clientWidth > 1352
                                     ? setShowSideBar((showSideBar) => {
                                           return !showSideBar;
                                       })

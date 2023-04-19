@@ -1,6 +1,10 @@
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import {
+    Navigate,
+    RouterProvider,
+    createBrowserRouter,
+} from "react-router-dom";
 
 // Layouts
 import RootLayout from "./layouts/RootLayout";
@@ -9,6 +13,7 @@ import RootLayout from "./layouts/RootLayout";
 import Home from "./pages/home/Home";
 import { Provider } from "react-redux";
 import store from "./services/redux/store";
+import WatchScreen from "./pages/watch/WatchScreen";
 
 const appRouter = createBrowserRouter([
     {
@@ -18,6 +23,14 @@ const appRouter = createBrowserRouter([
             {
                 path: "/",
                 element: <Home></Home>,
+            },
+            {
+                path: "/watch/:id",
+                element: <WatchScreen></WatchScreen>,
+            },
+            {
+                path: "*",
+                element: <Navigate to="/"></Navigate>,
             },
         ],
     },

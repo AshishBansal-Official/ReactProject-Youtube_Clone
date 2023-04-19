@@ -7,40 +7,53 @@ import SideBar from "../pages/SideBar/SideBar";
 import MiniSideBar from "../pages/MiniSideBar";
 import SideBarContext from "../utils/contexts/SideBarContext";
 import OverlayContext from "../utils/contexts/OverlayContext";
+import IsWatchScreenContext from "../utils/contexts/IsWatchScreenContext";
 
 const RootLayout = () => {
     const [showOverlay, setShowOverlay] = useState(false);
     const [showSideBar, setShowSideBar] = useState(true);
+    const [isWatchScreen, setIsWatchScreen] = useState(false);
 
     return (
         <div className="text-sm w-full h-full scrollbar overflow-y-hidden">
-            <OverlayContext.Provider
+            <IsWatchScreenContext.Provider
                 value={{
-                    showOverlay,
-                    setShowOverlay,
+                    isWatchScreen,
+                    setIsWatchScreen,
                 }}
             >
-                <SideBarContext.Provider
+                <OverlayContext.Provider
                     value={{
-                        showSideBar,
-                        setShowSideBar,
+                        showOverlay,
+                        setShowOverlay,
                     }}
                 >
-                    <SideBarOverlay></SideBarOverlay>
-                    <Header></Header>
-                    {showSideBar && <SideBar></SideBar>}
-                    <MiniSideBar></MiniSideBar>
-                    <div
-                        className={`mt-[var(--header-height)] app-md:ml-[var(--min-sidebar-width)] app-sm:ml-0 overflow-x-hidden ${
-                            showSideBar
-                                ? "ml-[var(--sidebar-width)]"
-                                : "ml-[var(--min-sidebar-width)]"
-                        }`}
+                    <SideBarContext.Provider
+                        value={{
+                            showSideBar,
+                            setShowSideBar,
+                        }}
                     >
-                        <Outlet></Outlet>
-                    </div>
-                </SideBarContext.Provider>
-            </OverlayContext.Provider>
+                        <SideBarOverlay></SideBarOverlay>
+                        <Header></Header>
+                        <div className={`${isWatchScreen ? "hidden" : ""}`}>
+                            {showSideBar && <SideBar></SideBar>}
+                        </div>
+                        <MiniSideBar></MiniSideBar>
+                        <div
+                            className={`mt-[var(--header-height)]  overflow-x-hidden ${
+                                isWatchScreen
+                                    ? "ml-0"
+                                    : showSideBar
+                                    ? "ml-[var(--sidebar-width)] app-md:ml-[var(--min-sidebar-width)] app-sm:ml-0"
+                                    : "ml-[var(--min-sidebar-width)] app-md:ml-[var(--min-sidebar-width)] app-sm:ml-0"
+                            } `}
+                        >
+                            <Outlet></Outlet>
+                        </div>
+                    </SideBarContext.Provider>
+                </OverlayContext.Provider>
+            </IsWatchScreenContext.Provider>
         </div>
     );
 };
