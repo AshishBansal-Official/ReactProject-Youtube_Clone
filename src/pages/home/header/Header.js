@@ -4,8 +4,6 @@ import Chip from "./Chip";
 import { SVGRenderer } from "../../../components/SVGRenderer";
 import slider_left_arrow from "../../../images/icons/slider_left_arrow.svg";
 import slider_right_arrow from "../../../images/icons/slider_right_arrow.svg";
-import { useDispatch } from "react-redux";
-import { getVideosByCategory } from "../../../services/redux/slices/homeVideosSlice";
 
 const chips = [
     "All",
@@ -26,7 +24,7 @@ const chips = [
     "Recently Uploaded",
 ];
 
-const Header = () => {
+const Header = ({ activeCategory, handleClick }) => {
     const { showSideBar } = useContext(SideBarContext);
     const [adjustWidth, setAdjustWidth] = useState(true);
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -34,14 +32,6 @@ const Header = () => {
     const listRef = useRef(null);
     const [showLeftButton, setshowLeftButton] = useState(false);
     const [showRightButton, setshowRightButton] = useState(false);
-
-    const [activeElement, setActiveElement] = useState("All");
-    const dispatch = useDispatch();
-
-    const handleClick = (category) => {
-        setActiveElement(category);
-        dispatch(getVideosByCategory({ category: category }));
-    };
 
     // Show / hide slider buttons at start
     useEffect(() => {
@@ -115,7 +105,7 @@ const Header = () => {
                             key={chip}
                             name={chip}
                             onClick={() => handleClick(chip)}
-                            active={chip === activeElement}
+                            active={chip === activeCategory}
                         ></Chip>
                     );
                 })}

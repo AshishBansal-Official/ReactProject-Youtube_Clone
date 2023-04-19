@@ -42,8 +42,13 @@ const VideoCard = ({ video }) => {
             setDuration(items[0]?.contentDetails?.duration);
             setViews(items[0]?.statistics?.viewCount);
         };
-        getVideoDetails();
-    }, [_videoId]);
+        if (video.contentDetails && video.statistics) {
+            setDuration(video.contentDetails?.duration);
+            setViews(video.statistics?.viewCount);
+        } else {
+            getVideoDetails();
+        }
+    }, [_videoId, video.contentDetails, video.statistics]);
 
     useEffect(() => {
         const getChannelIcon = async () => {
