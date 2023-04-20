@@ -14,6 +14,7 @@ import Home from "./pages/home/Home";
 import { Provider } from "react-redux";
 import store from "./services/redux/store";
 import WatchScreen from "./pages/watch/WatchScreen";
+import SearchScreen from "./pages/search/SearchScreen";
 
 const appRouter = createBrowserRouter([
     {
@@ -27,6 +28,10 @@ const appRouter = createBrowserRouter([
             {
                 path: "/watch/:id",
                 element: <WatchScreen></WatchScreen>,
+            },
+            {
+                path: "/search/:query",
+                element: <SearchScreen></SearchScreen>,
             },
             {
                 path: "*",

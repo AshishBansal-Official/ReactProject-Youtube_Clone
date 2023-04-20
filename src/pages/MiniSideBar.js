@@ -55,7 +55,7 @@ const MiniSideBar = () => {
                     return (
                         <div
                             key={tile.name}
-                            className="pb-3 pt-4 w-16 flex flex-col items-center justify-center  rounded-lg hover:bg-dark-3 cursor-pointer"
+                            className="pb-3 pt-4 w-16 flex flex-col items-center justify-center rounded-lg hover:bg-overlay-1 cursor-pointer active:bg-overlay-2"
                         >
                             <div className="mb-0.5 w-6 h-6">
                                 {<SVGRenderer small src={tile.icon} />}

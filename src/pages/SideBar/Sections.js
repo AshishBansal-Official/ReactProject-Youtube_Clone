@@ -263,7 +263,7 @@ const Sections = () => {
                                     ) : (
                                         <div
                                             key={tile.name}
-                                            className="flex items-center justify-start px-1 rounded-lg"
+                                            className="flex items-center justify-start px-1 rounded-lg hover:bg-overlay-1 cursor-pointer active:bg-overlay-2"
                                         >
                                             <SVGRenderer
                                                 src={tile.icon}

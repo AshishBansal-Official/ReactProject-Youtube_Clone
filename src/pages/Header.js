@@ -16,6 +16,7 @@ import OverlayContext from "../utils/contexts/OverlayContext";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "../services/redux/slices/authSlice";
 import IsWatchScreenContext from "../utils/contexts/IsWatchScreenContext";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
     const [value, setValue] = useState("");
@@ -28,11 +29,18 @@ const Header = () => {
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const user = useSelector((store) => store.auth.user);
 
     const updateWindowWidth = () => {
         setWindowWidth(window.innerWidth);
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        navigate(`search/${value}`);
+        setValue("");
     };
 
     useEffect(() => {
@@ -107,7 +115,10 @@ const Header = () => {
                                 : " bg-dark-0 ml-9 border-dark-4"
                         }`}
                     >
-                        <form className="h-full flex items-center justify-end flex-grow rounded-l-full">
+                        <form
+                            onSubmit={handleSubmit}
+                            className="h-full flex items-center justify-end flex-grow rounded-l-full"
+                        >
                             {isFocused && (
                                 <SVGRenderer
                                     small
