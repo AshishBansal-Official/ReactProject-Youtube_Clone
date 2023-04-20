@@ -3,7 +3,7 @@ import React from "react";
 const RelatedVideoCard = () => {
     return (
         <div className="flex mb-2">
-            <div className="relative w-[10.5rem] aspect-video bg-emerald-50 mr-2 rounded-lg">
+            <div className="relative w-[10.5rem] aspect-video bg-overlay-1 mr-2 rounded-lg">
                 <span className="absolute bottom-1 right-1 bg-black/90 rounded-md text-xs px-1 py-[0.1rem]">
                     22:35
                 </span>

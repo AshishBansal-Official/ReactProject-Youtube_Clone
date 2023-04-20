@@ -4,8 +4,11 @@ import save_icon from "../../images/watch/icons/save_icon.svg";
 import share_icon from "../../images/watch/icons/share_icon.svg";
 import like_icon from "../../images/watch/icons/like_icon.svg";
 import dislike_icon from "../../images/watch/icons/dislike_icon.svg";
+import { useState } from "react";
 
 const PlayerSectionMetaData = () => {
+    const [showContent, setShowContent] = useState(false);
+
     return (
         <div className="flex flex-col mt-3 -ml-0.5 app-xs:mt-2.5 app-xs:ml-1 mb-6">
             {/* Top */}
@@ -63,7 +66,15 @@ const PlayerSectionMetaData = () => {
                 </div>
             </div>
             {/* Bottom */}
-            <div className="mt-3 rounded-lg w-full bg-overlay-1">
+            <div className={`relative mt-3 rounded-lg w-full bg-overlay-1`}>
+                {!showContent && (
+                    <div
+                        className="absolute bottom-3 right-3 font-semibold bg-[#272727] px-1 cursor-pointer select-none"
+                        onClick={() => setShowContent(true)}
+                    >
+                        Show More
+                    </div>
+                )}
                 <div className="p-3">
                     <div className="flex">
                         <div className="mr-1.5">651K views</div>
@@ -72,12 +83,36 @@ const PlayerSectionMetaData = () => {
                     </div>
                     <div className="text-app-blue">#hashtag</div>
                     <br />
-                    <div>
+                    <div
+                        className={`overflow-y-hidden ${
+                            showContent ? "" : "max-h-5 overflow-y-hidden"
+                        }`}
+                    >
                         Lorem ipsum dolor sit amet consectetur adipisicing elit.
                         Sed delectus laboriosam aspernatur doloremque
                         necessitatibus laborum quas, magnam eaque reprehenderit
                         quasi quae, a itaque sint inventore incidunt, sequi
-                        fugiat fuga tempore!
+                        fugiat fuga tempore! Lorem ipsum dolor sit amet
+                        consectetur adipisicing elit. Eveniet illum fugiat quam,
+                        quos labore doloremque ipsam consectetur veritatis sed.
+                        Ex facilis nemo omnis sunt non distinctio eum pariatur
+                        qui nesciunt. Lorem ipsum dolor sit amet consectetur
+                        adipisicing elit. Sed delectus laboriosam aspernatur
+                        doloremque necessitatibus laborum quas, magnam eaque
+                        reprehenderit quasi quae, a itaque sint inventore
+                        incidunt, sequi fugiat fuga tempore! Lorem ipsum dolor
+                        sit amet consectetur adipisicing elit. Eveniet illum
+                        fugiat quam, quos labore doloremque ipsam consectetur
+                        veritatis sed. Ex facilis nemo omnis sunt non distinctio
+                        eum pariatur qui nesciunt.
+                        <div
+                            className="font-semibold cursor-pointer select-none"
+                            onClick={() => {
+                                setShowContent(false);
+                            }}
+                        >
+                            Show Less
+                        </div>
                     </div>
                 </div>
             </div>
