@@ -85,7 +85,7 @@ const CommentsSection = ({ id }) => {
                     }
                 >
                     {_comments?.map((comment, i) => {
-                        return <Comment comment={comment} />;
+                        return <Comment key={i} comment={comment} />;
                     })}
                 </InfiniteScroll>
             </div>

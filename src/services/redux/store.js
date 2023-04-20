@@ -6,6 +6,7 @@ import homeVideosReducer from "./slices/homeVideosSlice";
 import selectVideoReducer from "./slices/selectVideoSlice";
 import channelDetailsReducer from "./slices/channelDetailsSlice";
 import commentsReducer from "./slices/commentsSlice";
+import relatedVideosReducer from "./slices/relatedVideosSlice";
 
 const store = configureStore({
     reducer: {
@@ -14,6 +15,7 @@ const store = configureStore({
         selectVideo: selectVideoReducer,
         channelDetails: channelDetailsReducer,
         comments: commentsReducer,
+        relatedVideos: relatedVideosReducer,
     },
     middleware: [thunk],
 });

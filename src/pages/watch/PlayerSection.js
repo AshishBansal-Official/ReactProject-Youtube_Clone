@@ -13,6 +13,7 @@ const PlayerSection = ({ id }) => {
                     title={video?.snipper?.title}
                     className="border-0 w-full aspect-video"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    onError={() => {}}
                     allowFullScreen
                 />
             </div>
