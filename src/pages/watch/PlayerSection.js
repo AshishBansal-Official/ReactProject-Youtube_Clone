@@ -1,17 +1,22 @@
 import React from "react";
 import PlayerSectionMetaData from "./PlayerSectionMetaData";
+import { useSelector } from "react-redux";
 
-const PlayerSection = () => {
+const PlayerSection = ({ id }) => {
+    const { video } = useSelector((state) => state.selectVideo);
+
     return (
         <>
             <div className="w-full">
                 <iframe
-                    src="https://www.youtube.com/embed/tgbNymZ7vqY"
-                    title="W3Schools Free Online Web Tutorials"
+                    src={`https://www.youtube.com/embed/${id}`}
+                    title={video?.snipper?.title}
                     className="border-0 w-full aspect-video"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
                 />
             </div>
-            <PlayerSectionMetaData />
+            <PlayerSectionMetaData id={id} />
         </>
     );
 };

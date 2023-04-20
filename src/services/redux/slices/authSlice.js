@@ -5,7 +5,6 @@ import { signInWithPopup, signOut } from "firebase/auth";
 export const loginUser = createAsyncThunk("user/login", async () => {
     provider.addScope("https://www.googleapis.com/auth/youtube.force-ssl"); // Scope for youtube api
     const result = await signInWithPopup(auth, provider);
-    console.log(result);
     return result;
 });
 
@@ -50,8 +49,9 @@ const authSlice = createSlice({
             );
         });
         builder.addCase(loginUser.rejected, (state, action) => {
-            state.error = action.error.message;
             state.loading = false;
+            state.error = action.error.message;
+            // console.log(action.error.message);
         });
         builder.addCase(logoutUser.fulfilled, (state, action) => {
             state.accessToken = null;
@@ -60,7 +60,8 @@ const authSlice = createSlice({
             sessionStorage.removeItem("ytd-clone-user");
         });
         builder.addCase(logoutUser.rejected, (state, action) => {
-            console.log(action.error.message);
+            state.error = action.error.message;
+            // console.log(action.error.message);
         });
     },
 });

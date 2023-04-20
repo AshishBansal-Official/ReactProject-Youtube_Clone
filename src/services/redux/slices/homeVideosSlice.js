@@ -77,7 +77,8 @@ const homeVideosSlice = createSlice({
         });
         builder.addCase(getPopularVideos.rejected, (state, action) => {
             state.loading = false;
-            console.log(action.error.message);
+            state.error = action.error.message;
+            // console.log(state.error);
         });
     },
 });

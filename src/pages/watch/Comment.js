@@ -4,9 +4,17 @@ import { SVGRenderer } from "../../components/SVGRenderer";
 import like_icon from "../../images/watch/icons/like_icon.svg";
 import dislike_icon from "../../images/watch/icons/dislike_icon.svg";
 import comments_reply_show_icon from "../../images/watch/icons/comments_reply_show_icon.svg";
+import moment from "moment/moment";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
-const Comment = () => {
+const Comment = ({ comment }) => {
     const [hide, setHide] = useState(false);
+    const {
+        authorDisplayName,
+        authorProfileImageUrl,
+        publisedAt,
+        textDisplay,
+    } = comment;
 
     return (
         <div className="flex flex-col mb-4 items-start">
@@ -15,8 +23,8 @@ const Comment = () => {
                     {hide ? (
                         ""
                     ) : (
-                        <img
-                            src={""}
+                        <LazyLoadImage
+                            src={authorProfileImageUrl}
                             alt=""
                             className="h-full w-full rounded-full"
                             onError={() => setHide(true)}
@@ -26,16 +34,13 @@ const Comment = () => {
                 <div>
                     <div className="flex items-center mb-0.5 -mt-[0.2rem]">
                         <div className="mr-1 text-[0.8125rem] font-semibold">
-                            GJK music
+                            {authorDisplayName}
                         </div>
                         <div className="text-text-secondary text-xs">
-                            1 month ago
+                            {moment(publisedAt).fromNow()}
                         </div>
                     </div>
-                    <div>
-                        Arijit Singh is not just a word, it's emotion for
-                        millions of people across the world{" "}
-                    </div>
+                    <div>{textDisplay}</div>
                     <div className="flex items-center justify-start mt-1.5 -ml-2">
                         <SVGRenderer
                             small
@@ -56,12 +61,14 @@ const Comment = () => {
                     </div>
                 </div>
             </div>
-            <div>
-                <div className="flex items-center pl-3 pr-4 py-1.5 ml-11 select-none cursor-pointer text-app-blue hover:bg-app-blue/30 rounded-full">
-                    <SVGRenderer small src={comments_reply_show_icon} />
-                    <div className="pl-1.5">3 replies</div>
+            {comment?.totalReplyCount > 0 && (
+                <div>
+                    <div className="flex items-center pl-3 pr-4 py-1.5 ml-11 select-none cursor-pointer text-app-blue hover:bg-app-blue/30 rounded-full">
+                        <SVGRenderer small src={comments_reply_show_icon} />
+                        <div className="pl-1.5">3 replies</div>
+                    </div>
                 </div>
-            </div>
+            )}
         </div>
     );
 };

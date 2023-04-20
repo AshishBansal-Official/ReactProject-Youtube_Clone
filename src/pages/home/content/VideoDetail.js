@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const VideoDetail = ({ channelIcon, title, channel, views, release }) => {
     const [hide, setHide] = useState(false);
@@ -8,7 +9,7 @@ const VideoDetail = ({ channelIcon, title, channel, views, release }) => {
                 {hide ? (
                     ""
                 ) : (
-                    <img
+                    <LazyLoadImage
                         src={channelIcon}
                         alt=""
                         className="h-full w-full rounded-full"

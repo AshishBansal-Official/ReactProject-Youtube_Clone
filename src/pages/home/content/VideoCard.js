@@ -4,6 +4,7 @@ import api from "../../../utils/api";
 import { useEffect, useState } from "react";
 import moment from "moment";
 import numeral from "numeral";
+import { useNavigate } from "react-router-dom";
 
 const VideoCard = ({ video }) => {
     const {
@@ -18,6 +19,8 @@ const VideoCard = ({ video }) => {
             },
         },
     } = video;
+
+    const navigate = useNavigate();
 
     const [views, setViews] = useState(null);
     const [duration, setDuration] = useState(null);
@@ -65,8 +68,15 @@ const VideoCard = ({ video }) => {
         getChannelIcon();
     }, [channelId]);
 
+    const handleVideoClick = () => {
+        navigate(`/watch/${_videoId}`);
+    };
+
     return (
-        <div className="flex flex-col basis-80 min-w-[20rem] max-w-[22.5rem] flex-grow">
+        <div
+            className="flex flex-col basis-80 min-w-[20rem] max-w-[22.5rem] flex-grow cursor-pointer"
+            onClick={handleVideoClick}
+        >
             <VideoThumbnail
                 thumbnail={url}
                 duration={_duration}
