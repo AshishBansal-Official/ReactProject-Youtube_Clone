@@ -1,10 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import api from "../../../utils/api";
+import api2 from "../../../utils/api";
 
 export const getChannelDetails = createAsyncThunk(
     "/channel",
     async (state, action) => {
-        const { data } = await api("/channels", {
+        const { data } = await api2("/channels", {
             params: {
                 part: "snippet,statistics,contentDetails",
                 id: state.channelId,

@@ -6,7 +6,7 @@ export const getCommentsOfVideoById = createAsyncThunk(
     async (state, action) => {
         const { data } = await api("/commentThreads", {
             params: {
-                part: "snippet,replies",
+                part: "snippet",
                 videoId: state.id,
                 pageToken:
                     action.getState().comments.nextPageToken == null

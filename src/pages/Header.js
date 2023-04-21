@@ -85,7 +85,7 @@ const Header = () => {
                                       );
                             }}
                         />
-                        <div className="flex pl-4">
+                        <div className="flex pl-4 select-none">
                             <div className="min-h-5 h-5 aspect-auto">
                                 <img
                                     src={logo_icon}
@@ -155,7 +155,11 @@ const Header = () => {
                             showSearchBar ? "-mr-2 bg-dark-2" : "rounded-full"
                         }`}
                     >
-                        <SVGRenderer small src={mic_icon} />
+                        <SVGRenderer
+                            small
+                            src={mic_icon}
+                            className="cursor-pointer"
+                        />
                     </div>
                 </div>
                 {/* // end */}

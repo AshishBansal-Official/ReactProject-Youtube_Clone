@@ -10,6 +10,7 @@ import numeral from "numeral";
 import moment from "moment/moment";
 import { getChannelDetails } from "../../services/redux/slices/channelDetailsSlice";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import PlayerSectionMetaDataShimmer from "../shimmer/PlayerSectionMetaDataShimmer";
 
 const PlayerSectionMetaData = ({ id }) => {
     const [showContent, setShowContent] = useState(false);
@@ -31,7 +32,9 @@ const PlayerSectionMetaData = ({ id }) => {
     return (
         <>
             {loading ? (
-                <div>Loading...</div>
+                <>
+                    <PlayerSectionMetaDataShimmer />
+                </>
             ) : (
                 <div className="flex flex-col mt-3 -ml-0.5 app-xs:mt-2.5 app-xs:ml-1 mb-6">
                     {/* Top */}

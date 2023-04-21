@@ -9,7 +9,6 @@ const RelatedVideoCard = ({ video }) => {
     const {
         id,
         snippet: {
-            channelId,
             channelTitle,
             title,
             publishedAt,
@@ -21,7 +20,6 @@ const RelatedVideoCard = ({ video }) => {
 
     const [views, setViews] = useState(null);
     const [duration, setDuration] = useState(null);
-    const [channelIcon, setChannelIcon] = useState(null);
 
     const seconds = moment.duration(duration).asSeconds();
     const _duration = moment.utc(seconds * 1000).format("mm:ss");
@@ -41,21 +39,6 @@ const RelatedVideoCard = ({ video }) => {
         };
         getVideoDetails();
     }, [id]);
-
-    useEffect(() => {
-        const getChannelIcon = async () => {
-            const {
-                data: { items },
-            } = await api("/channels", {
-                params: {
-                    part: "snippet",
-                    id: channelId,
-                },
-            });
-            setChannelIcon(items[0]?.snippet?.thumbnails?.default?.url);
-        };
-        getChannelIcon();
-    }, [channelId]);
 
     const handleVideoClick = () => {
         navigate(`/watch/${id.videoId}`);
