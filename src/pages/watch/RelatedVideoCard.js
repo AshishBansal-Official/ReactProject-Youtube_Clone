@@ -11,7 +11,6 @@ const RelatedVideoCard = ({ video }) => {
         snippet: {
             channelId,
             channelTitle,
-            description,
             title,
             publishedAt,
             thumbnails: { medium },

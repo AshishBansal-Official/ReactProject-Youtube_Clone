@@ -16,7 +16,7 @@ const Home = () => {
         dispatch(getPopularVideos());
     }, [dispatch]);
 
-    const videos = useSelector((store) => store.homeVideos.videos);
+    const { loading, videos } = useSelector((store) => store.homeVideos);
 
     const [activeCategory, setActiveCategory] = useState("All");
 
@@ -35,7 +35,10 @@ const Home = () => {
     };
 
     return (
-        <div className="flex flex-col">
+        <div className="relative flex flex-col overflow-x-hidden">
+            {loading && (
+                <div className="absolute w-full h-full z-20 bg-app-bg/50 "></div>
+            )}
             <Header
                 activeCategory={activeCategory}
                 handleClick={handleClick}

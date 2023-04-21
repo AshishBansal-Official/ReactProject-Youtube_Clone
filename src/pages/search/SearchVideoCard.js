@@ -65,30 +65,33 @@ const SearchVideoCard = ({ video }) => {
 
     return (
         <div
-            className="flex mt-4 cursor-pointer"
+            className="flex app-xxs:flex-col mt-4 mx-1 cursor-pointer"
             onClick={() => {
                 handleVideoClick();
             }}
         >
-            <div className="relative max-w-[22.5rem] min-w-[15rem] w-full aspect-video bg-overlay-1 mr-4 rounded-lg">
+            <div className="relative flex-shrink-0 max-w-[22.5rem] app-xxs:max-w-none app-xxs:rounded-none app-sm:max-w-[15rem] w-full aspect-video bg-overlay-1 mr-4 rounded-lg">
                 <LazyLoadImage
                     src={medium?.url}
                     alt=""
-                    className="rounded-lg h-full w-full"
+                    className="rounded-lg h-full w-full app-xxs:rounded-none"
                 />
                 <span className="absolute bottom-1 right-1 bg-black/90 rounded-md text-xs px-1 py-[0.1rem]">
                     {_duration}
                 </span>
             </div>
             <div className="flex flex-col text-text-secondary">
-                <span className="text-lg font-medium line-clamp-2 text-text-primary">
+                <span className="text-lg app-sm:text-base app-sm:mt-2 app-sm:mb-0 font-medium line-clamp-2 text-text-primary">
                     {title}
                 </span>
                 <span className="text-xs">
+                    <span className="text-xs hidden app-xxs:inline">
+                        {channelTitle} •{" "}
+                    </span>
                     {numeral(views).format("0.a")} views •{" "}
                     {moment(publishedAt).fromNow()}
                 </span>
-                <div className="flex my-3 items-center">
+                <div className="flex my-3 items-center app-xxs:hidden">
                     <div className="h-6 aspect-square rounded-full mr-2 bg-overlay-2">
                         {hide ? (
                             ""
@@ -103,7 +106,9 @@ const SearchVideoCard = ({ video }) => {
                     </div>
                     <span className="text-xs">{channelTitle}</span>
                 </div>
-                <div className="mb-1 text-xs">{description}</div>
+                <div className="mb-1 text-xs line-clamp-2 app-xxs:hidden">
+                    {description}
+                </div>
             </div>
         </div>
     );
