@@ -88,7 +88,7 @@ const PlayerSectionMetaData = ({ id }) => {
                                 <SVGRenderer small src={share_icon} />
                                 <span>Share</span>
                             </div>
-                            <div className="app-xs:flex [@media(min-width:1254px)]:flex hidden items-center gap-1.5 bg-overlay-1 hover:bg-overlay-2 cursor-pointer pr-4 pl-2.5 py-1.5 rounded-full">
+                            <div className="app-xxs:hidden app-xs:flex [@media(min-width:1254px)]:flex hidden items-center gap-1.5 bg-overlay-1 hover:bg-overlay-2 cursor-pointer pr-4 pl-2.5 py-1.5 rounded-full">
                                 <SVGRenderer small src={save_icon} />
                                 <span>Save</span>
                             </div>
@@ -131,7 +131,7 @@ const PlayerSectionMetaData = ({ id }) => {
                             <div className="text-app-blue">#hashtag</div>
                             <br />
                             <div
-                                className={`overflow-y-hidden ${
+                                className={`overflow-y-hidden  overflow-x-hidden ${
                                     showContent
                                         ? ""
                                         : "max-h-5 overflow-y-hidden"
