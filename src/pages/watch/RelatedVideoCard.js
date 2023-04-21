@@ -54,7 +54,7 @@ const RelatedVideoCard = ({ video }) => {
             });
             setChannelIcon(items[0]?.snippet?.thumbnails?.default?.url);
         };
-        getChannelIcon();
+        // getChannelIcon();
     }, [channelId]);
 
     const handleVideoClick = () => {
