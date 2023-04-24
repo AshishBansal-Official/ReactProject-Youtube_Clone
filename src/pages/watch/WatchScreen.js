@@ -19,6 +19,7 @@ const WatchScreen = () => {
 
     useEffect(() => {
         setIsWatchScreen(true);
+        window.scrollTo({ top: 0, behavior: "smooth" });
         return () => {
             setIsWatchScreen(false);
         };

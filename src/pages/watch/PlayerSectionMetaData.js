@@ -64,7 +64,7 @@ const PlayerSectionMetaData = ({ id }) => {
                                     <div className="text-base -mt-[0.1rem] font-medium line-clamp-1">
                                         {video?.snippet?.channelTitle}
                                     </div>
-                                    <div className="text-text-secondary mt-[0.0.5rem] text-xs">
+                                    <div className="text-text-secondary mt-[0.5rem] text-xs">
                                         {numeral(
                                             channel?.statistics?.subscriberCount
                                         ).format("0.a")}{" "}
